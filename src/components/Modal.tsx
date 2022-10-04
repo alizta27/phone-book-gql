@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import { MdCheckCircleOutline, MdOutlineCancel } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import {
   ModalTitle,
   ModalInnerWrap,
@@ -66,11 +67,12 @@ const Modal: React.FC<Props> = ({ modalIsOpen, closeModal, id }) => {
             localStorage.setItem('favourite', JSON.stringify(arr));
             Ctx?.setFavourite(arr);
           }
+          toast.success('Success Delete Contact', { autoClose: 2000 });
         }
       })
       .catch((err) => {
         if (err) {
-          console.log(err);
+          toast.error('Failed Delete Contact', { autoClose: 2000 });
         }
       });
   };

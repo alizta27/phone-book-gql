@@ -16,7 +16,7 @@ export const SideBarWrapperMobile = styled.div`
   flex-direction: column;
   height: 100vh;
   gap: 1px;
-  padding-right: 5%;
+  padding: 0px 1% 0px; 1%;
 `;
 export const SideBarItemWrapper = styled.div`
   display: flex;
@@ -104,6 +104,7 @@ export const InnerWrapper = styled.div`
   -webkit-box-shadow: -3px 0px 18px -6px rgba(130, 130, 130, 0.39);
   -moz-box-shadow: -3px 0px 18px -6px rgba(130, 130, 130, 0.39);
 `;
+
 export const Search = styled.div`
   display: flex;
   padding: 1%;
@@ -147,14 +148,12 @@ export const NavBarLink = styled(Link)`
   height: 80px;
 `;
 export const InputForm = styled.input`
-  background-color: #f4f5f9;
   width: 100%;
   height: 100%;
-  border-bottom: 2px solid #8987ab;
+  border-bottom: 2px solid #90eca4;
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
-  border-radius: 0px 0px 50px 0px;
   :focus {
     outline: none !important;
   }
@@ -166,25 +165,25 @@ export const PageTitleWrapper = styled.div`
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  background-color: #f4f5f9;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 `;
 export const PageTitle = styled.p`
-  color: #8987ab;
-  font-weight: bold;
-  font-size: 24px;
+  font-weight: 900;
+  color: #1e3b49;
   margin: 0px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 24px;
 `;
 export const InputContactWrapper = styled.div`
   display: flex;
   padding: 10px;
   gap: 20px;
+  flex-direction: row;
   border-radius: 50px 50px 50px 50px;
   align-items: center;
-  background-color: #f4f5f9;
   margin-bottom: 5px;
 `;
-export const InputIconWrapper0 = styled.div`
+export const InputIconWrapper = styled.div`
   width: 70px;
   height: 70px;
   flex-shrink: 0;
@@ -192,71 +191,59 @@ export const InputIconWrapper0 = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ff7440;
+  background-color: #ffff;
+  box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
+  -webkit-box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
+  -moz-box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
+  flex-shrink: 1;
 `;
-export const InputIconWrapper1 = styled.div`
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #aedae7;
-`;
-export const InputIconWrapper2 = styled.div`
-  width: 70px;
-  height: 70px;
-  flex-shrink: 0;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffcb39;
-`;
+
 export const TitleAndInputWrapper = styled.div`
   width: 100%;
-  height: 70px;
   display: flex;
-  gap: 10%;
+  gap: 10px;
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0px 10px 0px 0px;
   align-items: left;
 `;
-export const TitleInput = styled.p`
-  margin: 0px;
-  color: #3b3775;
-  font-weight: bold;
+export const TitleAndInputNumberWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0px 10px 0px 0px;
+  align-items: left;
 `;
-export const ButtonAddNumber = styled.button`
+export const TitleInput = styled.p`
+  font-weight: 700;
+  color: #1e3b49;
+  margin: 0px;
+  font-family: 'Nunito Sans', sans-serif;
+`;
+export const ButtonAddNumber = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #aedae7;
+  border: 0px solid #ff7182;
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
-  color: #ffffff;
-  font-size: 30px;
-  font-weight: bold;
-  background-color: #aedae7;
+  height: 35px;
+  width: 35px;
+  background-color: #90eaa2;
 `;
 export const ButtonRemoveNumber = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ff7440;
+  border: 0px solid #ff7182;
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
-  color: #ffffff;
-  font-size: 30px;
-  font-weight: bold;
-  background-color: #ff7440;
+  height: 35px;
+  width: 35px;
+  background-color: #ff7182;
   :disabled {
-    background-color: #ffff;
-    border: 1px solid #ffff;
+    background-color: #fbd2d8;
+    border: 0px solid #fbd2d8;
     color: #f2f3f8;
   }
 `;
@@ -296,16 +283,16 @@ export const AddButton = styled.div`
   align-self: center;
   width: 50%;
   cursor: pointer;
-  background-color: rgb(255, 121, 68);
-  box-shadow: -1px 15px 24px -6px rgba(237, 135, 77, 0.45);
-  -webkit-box-shadow: -1px 15px 24px -6px rgba(237, 135, 77, 0.45);
-  -moz-box-shadow: -1px 15px 24px -6px rgba(237, 135, 77, 0.45);
+  background-color: #8feaa1;
+  box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
+  -webkit-box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
+  -moz-box-shadow: 0px 0px 22px 4px rgba(140, 235, 159, 0.58);
 `;
 export const AddText = styled.p`
+  font-weight: 900;
   color: #ffff;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 5px;
+  font-family: 'Nunito Sans', sans-serif;
+  margin-top: 10px;
   margin-bottom: 10px;
 `;
 export const DetailWrapper = styled.div`
@@ -528,4 +515,11 @@ export const ModalBtnWrap = styled.div`
   display: flex;
   flex-direction: row;
   gap: 50px;
+`;
+export const EmptyData = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 100px;
 `;

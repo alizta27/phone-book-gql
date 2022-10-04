@@ -8,11 +8,14 @@ import {
   WrapTableItem,
   ListWrapItem,
   ItemInfo,
+  EmptyData,
 } from '../assets/styles';
 import { Contact } from '../assets/types';
-import React, { useContext } from 'react';
+import BarLoader from 'react-spinners/BarLoader';
+import React, { useContext, CSSProperties } from 'react';
+import { toast } from 'react-toastify';
 import { MyContext } from '../constant';
-import { MdDeleteForever, MdFavoriteBorder } from 'react-icons/md';
+import { MdDeleteForever, MdFavoriteBorder, MdWorkOff } from 'react-icons/md';
 
 interface Props {
   error?: any;
@@ -23,6 +26,13 @@ interface Props {
   openModal: any;
   favourites?: Contact[];
 }
+
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  borderColor: '#90ECA4',
+  marginTop: '100px',
+};
 
 const ListContact: React.FC<Props> = ({
   error,
@@ -55,12 +65,26 @@ const ListContact: React.FC<Props> = ({
     }
     localStorage.setItem('favourite', JSON.stringify(arr));
     Ctx?.setFavourite(arr);
+    toast.success('Success Add Fafourite Contact', { autoClose: 2000 });
   };
 
   if (error) {
-    return <p>Error</p>;
+    return (
+      <TableList>
+        <EmptyData>
+          <p>Oopss.. Something error</p>
+        </EmptyData>
+      </TableList>
+    );
   } else if (loading) {
-    return <p>Loading</p>;
+    return (
+      <BarLoader
+        color="#36d7b7"
+        height={9}
+        width={170}
+        cssOverride={override}
+      />
+    );
   } else if (contact) {
     contact = contact.sort((a: any, b: any) => {
       if (a.first_name.toLowerCase() < b.first_name.toLowerCase()) {
@@ -120,7 +144,9 @@ const ListContact: React.FC<Props> = ({
     } else {
       return (
         <TableList>
-          <p>No Data</p>
+          <EmptyData>
+            <MdWorkOff color="#DEFFE5" size={200} />
+          </EmptyData>
         </TableList>
       );
     }

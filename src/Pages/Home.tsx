@@ -4,7 +4,6 @@ import ListContact from '../components/ListContact';
 import Modal from '../components/Modal';
 import { useState } from 'react';
 import {
-  InnerWrapper,
   Search,
   InputSearch,
   ListTableWrap,
@@ -33,7 +32,7 @@ const Home: React.FC = () => {
     <SideBar>
       <MyContext.Consumer>
         {(el) => (
-          <InnerWrapper>
+          <>
             <Search
               onChange={(event) => {
                 const target = event.target as HTMLInputElement;
@@ -105,7 +104,7 @@ const Home: React.FC = () => {
               closeModal={closeModal}
               id={deleteId}
             />
-          </InnerWrapper>
+          </>
         )}
       </MyContext.Consumer>
     </SideBar>

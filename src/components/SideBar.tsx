@@ -1,5 +1,6 @@
 import SideBarItem from './SideBarItem';
 import { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 import Detail from '../Pages/Detail';
 import {
   Wrapper,
@@ -8,20 +9,36 @@ import {
   SideBarItemWrapper,
   SideBarItemWrapperMobile,
   DetailWrapper,
+  InnerWrapper,
 } from '../assets/styles';
 import { MyContext, AppContextInterface } from '../constant';
 import { CONTACT_LIST } from '../config/queries';
 import { useQuery } from '@apollo/client';
 
+type HeightProps = {
+  heightpx: number | string;
+};
+const InnerWrapperMobile = styled.div<HeightProps>((props) => ({
+  display: 'flex',
+  borderRadius: '20px',
+  flexDirection: 'column',
+  width: '100%',
+  padding: '3%',
+  height: props.heightpx + 'px',
+  maxHeight: '3',
+  backgroundColor: '#ffffff',
+  margin: '1%',
+  boxShadow: '-3px 0px 18px -6px rgba(130, 130, 130, 0.39)',
+}));
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-type Width = number;
 const SideBar: React.FC<LayoutProps> = ({ children }) => {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
-  const [width, setWidth] = useState<Width>(window.innerWidth);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  const [heightpx, setHeightpx] = useState<string | number>(window.innerWidth);
   const [contact, setContact] = useState<any[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [bucket, setBucket] = useState<any[]>([]);
@@ -73,7 +90,6 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
     }
     setTotal(contact?.length ? contact?.length : data?.contact?.length);
     setTotalFav(favourite.length);
-    console.log('render');
   }, [data, refetch, favourite]);
 
   useEffect(() => {
@@ -85,6 +101,7 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
+    setHeightpx(window.innerHeight - 180);
     window.addEventListener('resize', handleResizeWindow);
     return () => {
       window.removeEventListener('resize', handleResizeWindow);
@@ -134,7 +151,11 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
           <SideBarItemWrapperMobile>
             <SideBarItem isMobile={isMobile} />
           </SideBarItemWrapperMobile>
-          <Wrapper>{children}</Wrapper>
+          <Wrapper>
+            <InnerWrapperMobile heightpx={heightpx}>
+              {children}
+            </InnerWrapperMobile>
+          </Wrapper>
         </SideBarWrapperMobile>
       </MyContext.Provider>
     );
@@ -145,7 +166,9 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
           <SideBarItemWrapper>
             <SideBarItem isMobile={isMobile} />
           </SideBarItemWrapper>
-          <Wrapper>{children}</Wrapper>
+          <Wrapper>
+            <InnerWrapper>{children}</InnerWrapper>
+          </Wrapper>
           {isDetail && (
             <DetailWrapper>
               <Detail />
