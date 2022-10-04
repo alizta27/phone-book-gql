@@ -99,6 +99,7 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     setHeightpx(window.innerHeight - 180);
@@ -156,6 +157,11 @@ const SideBar: React.FC<LayoutProps> = ({ children }) => {
               {children}
             </InnerWrapperMobile>
           </Wrapper>
+          {isDetail && (
+            <DetailWrapper>
+              <Detail />
+            </DetailWrapper>
+          )}
         </SideBarWrapperMobile>
       </MyContext.Provider>
     );

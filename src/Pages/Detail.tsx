@@ -7,34 +7,40 @@ import {
   CloseBtnWrapper,
   FullName,
   Status,
-} from '../assets/styles'
-import ContactInformation from '../components/ContactInformation'
-import { GET_DETAIL } from '../config/queries'
-import { useQuery } from '@apollo/client'
-import { Contact } from '../assets/types'
-import { useEffect, useState } from 'react'
-import { MyContext } from '../constant'
-import { useContext } from 'react'
+} from '../assets/styles';
+import BarLoader from 'react-spinners/BarLoader';
+import ContactInformation from '../components/ContactInformation';
+import { GET_DETAIL } from '../config/queries';
+import { useQuery } from '@apollo/client';
+import { Contact } from '../assets/types';
+import { useEffect, CSSProperties, useState } from 'react';
+import { MyContext } from '../constant';
+import { useContext } from 'react';
+
+const override: CSSProperties = {
+  display: 'block',
+  margin: '0 auto',
+  borderColor: '#90ECA4',
+  marginTop: '100px',
+};
 
 const Detail: React.FC = () => {
-  const Ctx = useContext(MyContext)
+  const Ctx = useContext(MyContext);
   const { loading, error, data, refetch } = useQuery<any>(GET_DETAIL, {
     variables: {
-      id: ''
-    }
-  })
-  const [isRead, setIsRead] = useState(true)
+      id: '',
+    },
+  });
+  const [isRead, setIsRead] = useState(true);
 
   useEffect(() => {
-    const id = Ctx?.id
+    const id = Ctx?.id;
     if (id) {
       refetch({
-        id: id
-      })
+        id: id,
+      });
     }
-  }, [Ctx?.id, refetch])
-
-
+  }, [Ctx?.id, refetch]);
 
   const DetailHeader = () => {
     return (
@@ -44,18 +50,23 @@ const Detail: React.FC = () => {
           <CloseBtn onClick={() => Ctx?.setIsDetail(false)}>X</CloseBtn>
         </CloseBtnWrapper>
       </TitleDetailWrapper>
-    )
-  }
+    );
+  };
 
   if (loading) {
     return (
       <>
         <DetailHeader />
         <ProfilerWrapper>
-          <h1>Loading..</h1>
+          <BarLoader
+            color="#36d7b7"
+            height={9}
+            width={170}
+            cssOverride={override}
+          />
         </ProfilerWrapper>
       </>
-    )
+    );
   } else if (error) {
     return (
       <>
@@ -64,9 +75,9 @@ const Detail: React.FC = () => {
           <h1>Error..</h1>
         </ProfilerWrapper>
       </>
-    )
+    );
   } else {
-    const info: Contact = data?.contact_by_pk
+    const info: Contact = data?.contact_by_pk;
     return (
       <>
         <DetailHeader />
@@ -74,11 +85,15 @@ const Detail: React.FC = () => {
           <ImageProfile></ImageProfile>
           <FullName>{`${info?.first_name} ${info?.last_name}`}</FullName>
           <Status>online</Status>
-          <ContactInformation info={info} isRead={isRead} setIsRead={setIsRead} />
+          <ContactInformation
+            info={info}
+            isRead={isRead}
+            setIsRead={setIsRead}
+          />
         </ProfilerWrapper>
       </>
-    )
+    );
   }
-}
+};
 
-export default Detail
+export default Detail;
